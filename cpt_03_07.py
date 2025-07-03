@@ -79,3 +79,38 @@ print(f"Element {target} found at index: {result}")
 '''FIBONACCI SEARCH
 1.
 '''
+
+# from re import I
+def fibsearch(arr, target):
+  if not arr:
+    return -1
+  n=len(arr)
+  fib2=0
+  fib1=1
+  fib=fib1+fib2
+  while fib <n:
+    fib2=fib1
+    fib1=fib
+    fib= fib1+fib2
+  offset=-1
+  while fib>1:
+    i=min(offset + fib2, n-1)
+    if arr[i]==target:
+      return i
+    elif arr[i]<target:
+      offset=i
+      fib=fib1
+      fib1=fib2
+      fib2=fib-fib1
+    else:
+      fib=fib2
+      fib1=fib1-fib2
+      fib2=fib-fib1
+  if fib1 and arr[offset+1]==target:
+    return offset+1
+  return -1
+arr=[1,3,5,7,9,11]
+target=7
+result=fibsearch(arr, target)
+print(f"Element {target} found at index {result}")
+
